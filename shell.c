@@ -1,15 +1,14 @@
 #include "shell.h"
 
 /**
- * main - Entry point of the program.
- * @ac: The number of command-line arguments.
- * @av: An array of command-line arguments.
+ * main - This is the main of the program.
+ * @ac: This is to show the number of command lines args.
+ * @av: this is to show the array
  *
- * Return: 0 on success.
+ * Return: 0 on success other wise
  */
 int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
 {
-	/*static char *cmd = NULL;*/
 	char *__attribute__ ((unused)) cmd1;
 	char *argv[MAX_ARGS];
 
@@ -32,6 +31,7 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
 			continue;
 		if (_strcmp(argv[0], "exit") == 0)
 		{
+			free(cmd);
 			_1exit(argv[1]);
 		}
 
@@ -51,10 +51,10 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
 }
 
 /**
- * wspace - check character space or tab
- * @s: character to be checked
+ * wspace - This checks character space or the tabs
+ * @s: this is the to check
  *
- * Return: 1 if successful or 0 if not.
+ * Return: 1 if success or 0 otherwise.
  */
 
 int wspace(char s)
@@ -66,67 +66,67 @@ int wspace(char s)
 }
 
 /**
- * remwspaces - remove white spaces
- * @s: string to be checked
+ * remwspaces - this is to remove all the white spaces
+ * @s: this is the string to be checked that we implement
  */
 
 void remwspaces(char *s)
 {
-	int length = _strlen(s);
-	int i = 0, j = length - 1, k;
-	int l, count, m;
+	int len = _strlen(s);
+	int v = 0, d = len - 1, h;
+	int g, count, n;
 
 	if (s == NULL)
 		return;
 
-	while (i < length && wspace(s[i]))
+	while (v < len && wspace(s[v]))
 	{
-		i++;
+		v++;
 	}
-	while (j >= i && wspace(s[j]))
+	while (d >= v && wspace(s[d]))
 	{
-		j--;
+		d--;
 	}
-	k = 0;
-	while (i <= j)
+	h = 0;
+	while (v <= d)
 	{
-		s[k++] = s[i++];
+		s[h++] = s[v++];
 	}
-	s[k] = '\0';
-	l = 0;
+	s[h] = '\0';
+	g = 0;
 	count = 0;
-	for (m = 0; m <= j; m++)
+	for (n = 0; n <= d; n++)
 	{
-		if (s[m] != ' ')
+		if (s[n] != ' ')
 		{
-			s[l++] = s[m];
+			s[g++] = s[n];
 			count = 0;
 		}
 		else if (count == 0)
 		{
-			s[l++] = s[m];
+			s[g++] = s[n];
 			count++;
 		}
 	}
-	s[l] = '\0';
+	s[g] = '\0';
 }
 
 /**
- * read_command - Read user input from stdin.
+ * read_command - As the name indicates it reads user input
  *
- * Return: Pointer to the input command string.
+ * Return: This is to return the pointer to the input string.
  */
 char *read_command(void)
 {
-	char *cmd1 = _getline();
+	char *cmdd = _getline();
 
 	signal(SIGINT, handle_sigint);
-	return (cmd1);
+	return (cmdd);
 }
 
 /**
- * handle_sigint - Signal handler for SIGINT (Ctrl+C).
- * @signo: The signal number.
+ * handle_sigint - This is the Signal handlers.
+ * @signo: we use this as a signal num
  */
 void handle_sigint(int signo __attribute__((unused)))
 {
@@ -138,3 +138,4 @@ void handle_sigint(int signo __attribute__((unused)))
 	}
 	exit(0);
 }
+
