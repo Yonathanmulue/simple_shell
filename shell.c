@@ -1,14 +1,15 @@
 #include "shell.h"
 
 /**
- * main - This is the main of the program.
- * @ac: This is to show the number of command lines args.
- * @av: this is to show the array
+ * main - Entry point of the program.
+ * @ac: The number of command-line arguments.
+ * @av: An array of command-line arguments.
  *
- * Return: 0 on success other wise
+ * Return: 0 on success.
  */
 int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
 {
+	/*static char *cmd = NULL;*/
 	char *__attribute__ ((unused)) cmd1;
 	char *argv[MAX_ARGS];
 
@@ -50,10 +51,10 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
 }
 
 /**
- * wspace - This checks character space or the tabs
- * @s: this is the to check
+ * wspace - check character space or tab
+ * @s: character to be checked
  *
- * Return: 1 if success or 0 otherwise.
+ * Return: 1 if successful or 0 if not.
  */
 
 int wspace(char s)
@@ -65,67 +66,67 @@ int wspace(char s)
 }
 
 /**
- * remwspaces - this is to remove all the white spaces
- * @s: this is the string to be checked that we implement
+ * remwspaces - remove white spaces
+ * @s: string to be checked
  */
 
 void remwspaces(char *s)
 {
-	int len = _strlen(s);
-	int v = 0, d = len - 1, h;
-	int g, count, n;
+	int length = _strlen(s);
+	int i = 0, j = length - 1, k;
+	int l, count, m;
 
 	if (s == NULL)
 		return;
 
-	while (v < len && wspace(s[v]))
+	while (i < length && wspace(s[i]))
 	{
-		v++;
+		i++;
 	}
-	while (d >= v && wspace(s[d]))
+	while (j >= i && wspace(s[j]))
 	{
-		d--;
+		j--;
 	}
-	h = 0;
-	while (v <= d)
+	k = 0;
+	while (i <= j)
 	{
-		s[h++] = s[v++];
+		s[k++] = s[i++];
 	}
-	s[h] = '\0';
-	g = 0;
+	s[k] = '\0';
+	l = 0;
 	count = 0;
-	for (n = 0; n <= d; n++)
+	for (m = 0; m <= j; m++)
 	{
-		if (s[n] != ' ')
+		if (s[m] != ' ')
 		{
-			s[g++] = s[n];
+			s[l++] = s[m];
 			count = 0;
 		}
 		else if (count == 0)
 		{
-			s[g++] = s[n];
+			s[l++] = s[m];
 			count++;
 		}
 	}
-	s[g] = '\0';
+	s[l] = '\0';
 }
 
 /**
- * read_command - As the name indicates it reads user input
+ * read_command - Read user input from stdin.
  *
- * Return: This is to return the pointer to the input string.
+ * Return: Pointer to the input command string.
  */
 char *read_command(void)
 {
-	char *cmdd = _getline();
+	char *cmd1 = _getline();
 
 	signal(SIGINT, handle_sigint);
-	return (cmdd);
+	return (cmd1);
 }
 
 /**
- * handle_sigint - This is the Signal handlers.
- * @signo: we use this as a signal num
+ * handle_sigint - Signal handler for SIGINT (Ctrl+C).
+ * @signo: The signal number.
  */
 void handle_sigint(int signo __attribute__((unused)))
 {
@@ -137,4 +138,3 @@ void handle_sigint(int signo __attribute__((unused)))
 	}
 	exit(0);
 }
-
