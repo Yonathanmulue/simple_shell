@@ -1,23 +1,23 @@
 #include "shell.h"
 
 /**
-* _getline - Read The Input By User From Stdin
+* _getline - This function Reads The Inputs By User From Stdin
 *
-* Return: Input
+* Return: Inputs that we submitted
 */
 char *_getline(void)
 {
-	int i = 0;
+	int v = 0;
 	ssize_t nread;
-	char c = 0, *buffer = malloc(sizeof(char) * BUFFER_SIZE);
+	char d = 0, *buffer = malloc(sizeof(char) * BUFFER_SIZE);
 
 	if (buffer == NULL)
 	{
 		return (NULL);
 	}
-	while (c != EOF && c != '\n')
+	while (d != EOF && d != '\n')
 	{
-		nread = read(STDIN_FILENO, &c, 1);
+		nread = read(STDIN_FILENO, &d, 1);
 		if (nread == 0 || nread == -1)
 		{
 			free(buffer);
@@ -26,40 +26,40 @@ char *_getline(void)
 			if (nread == -1)
 				perror("Error: ");
 		}
-		buffer[i] = c;
+		buffer[v] = d;
 		if (buffer[0] == '\n')
 		{
 			free(buffer);
 			return ("\0");
 		}
-		if (i + 1 >= BUFFER_SIZE)
+		if (v + 1 >= BUFFER_SIZE)
 		{
-			buffer = _realloc(buffer, i + 1);
+			buffer = _realloc(buffer, v + 1);
 			if (buffer == NULL)
 			{
 				free(buffer);
 				return (NULL);
 			}
 		}
-		i++;
+		v++;
 	}
-	buffer[i - 1] = '\0';
+	buffer[v - 1] = '\0';
 	hash_handler(buffer);
 	return (buffer);
 }
 
 /**
-* hash_handler - handle hash character in input
-* @buff: input buffer
+* hash_handler - This function handles the hash character in input
+* @buff: input buffer that we implemented
 */
 void hash_handler(char *buff)
 {
-	int i = 0;
+	int v = 0;
 
-	while (buff[i] != '\0')
+	while (buff[v] != '\0')
 	{
-		if (buff[i] == '#')
-			buff[i] = '\0';
-		i++;
+		if (buff[v] == '#')
+			buff[v] = '\0';
+		v++;
 	}
 }
