@@ -4,6 +4,7 @@
 #include <errno.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <stddef.h>
@@ -40,18 +41,6 @@ void tokenize(char *command, char *argv[MAX_ARGS]);
 int num_args(char *argv[]);
 int cd(char *path);
 int process_command(char **argv);
-/**
-* struct alias_s - this is for alias structures
-* @name: this is to call the name
-* @alias_cmd: we use this for the commands of alias
-*/
-typedef struct alias_s
-{
-	char *name;
-	char *alias_cmd;
-} alias_t;
-
-int alias_command(char *argv[MAX_ARGS], int num_arg);
 
 /**
 * struct Node - this is for the structure
@@ -109,10 +98,29 @@ void handle_segfault(int signo __attribute__((unused)));
 int _env(void);
 int _unsetenv(const char *name);
 int _setenv(const char *name, const char *value);
-void alias_name(alias_t alias);
 void remwspaces(char *s);
 void add_env_var(struct Node **head, const char *name, const char *value);
 void handle_sigint(int signo __attribute__((unused)));
 int wspace(char s);
+
+/**
+ * struct alias_s -this is the stucture defined
+ * @name: as the name indicates this is for the name
+ * @value: the value of the aliases
+ * @next: this points to the next
+ */
+typedef struct alias_s
+{
+	char *name;
+	char *value;
+	struct alias_s *next;
+} alias_t;
+void init_aliases(alias_t **aliases);
+int alias_command(char *argv[MAX_ARGS], int num_arg __attribute__((unused)));
+char *_strchr(const char *str, int character);
+void print_alias(alias_t *alias);
+void set_alias(alias_t **aliases, char *name, char *value);
+void print_all_aliases(alias_t *aliases);
+
 #endif
 

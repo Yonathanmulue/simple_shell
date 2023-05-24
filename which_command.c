@@ -38,3 +38,17 @@ char *which(char *command)
 	return (NULL);
 }
 
+/**
+ * print_all_aliases - this prints aliases
+ * @aliases: this is for the aliases
+ */
+void print_all_aliases(alias_t *aliases)
+{
+	alias_t *alias;
+
+	for (alias = aliases; alias; alias = alias->next)
+		print_alias(alias);
+}
+
+
+
