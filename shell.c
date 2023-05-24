@@ -33,6 +33,7 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
 		{
 			free(cmd);
 			_1exit(argv[1]);
+			exit(0);
 		}
 
 		if (process_command(argv) == 0)
