@@ -8,7 +8,7 @@
 */
 int cd(char *path)
 {
-	static int olds;
+	static int old;
 	char *home = _getenv("HOME");
 	char *oldpwd = _getenv("PWD");
 	char *newpwd;
