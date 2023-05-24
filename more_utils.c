@@ -95,17 +95,14 @@ int _atoi(const char *str)
 * _1exit - this functions exits with a status
 * @status: this is the status code to exit
 */
-void _1exit(char *status __attribute__((unused)))
+int _1exit(char *status __attribute__((unused)))
 {
-	int v;
+	int v = 0;
 
 	if (status != NULL)
 	{
 		v  = _atoi(status);
-		free(cmd);
-		exit(v);
 	}
-	free(cmd);
-	exit(0);
+	return (v);
 }
 
