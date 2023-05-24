@@ -1,23 +1,22 @@
 #include "shell.h"
 
 /**
- * _getenv - this is the caller.
- * @str: this is the str
- * Return: return path
+ * _getenv - getenv()
+ * @str: string
+ * Return: path
  */
 char *_getenv(char *str)
 {
-	int b = 0;
-	int ben = _strlen(str);
+	int i = 0;
+	int len = _strlen(str);
 
-	while (environ[b] != NULL)
+	while (environ[i] != NULL)
 	{
-		if (_strncmp(environ[b], str, ben) == 0 && environ[b][ben] == '=')
+		if (_strncmp(environ[i], str, len) == 0 && environ[i][len] == '=')
 		{
-			return (&(environ[b][ben + 1]));
+			return (&(environ[i][len + 1]));
 		}
-		b++;
+		i++;
 	}
 	return (NULL);
 }
-
