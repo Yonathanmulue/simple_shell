@@ -9,11 +9,11 @@
  */
 int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
 {
-	char *__attribute__ ((unused)) cmd1,cmd_copy == NULL;
-	char *argv[MAX_ARGS], *ar[MAX_ARGS];
+	char *__attribute__ ((unused)) cmd1;
+	char *argv[MAX_ARGS];
 
 	char *__attribute__ ((unused)) full_path;
-	int __attribute__ ((unused)) num_arg,r;
+	int __attribute__ ((unused)) num_arg;
 	signal(SIGSEGV, handle_segfault);
 
 	do {
@@ -26,17 +26,14 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
 			continue;
 
 		remwspaces(cmd);
-		cmd_copy = strdup(cmd);
-		tokenize(cmd_copy, ar);
 		tokenize(cmd, argv);
 		if (cmd[0] == '\0')
 			continue;
 		if (_strcmp(argv[0], "exit") == 0)
 		{
 			free(cmd);
-			r = _1exit(ar[1]);
-			free(cmd_copy);
-			exit(r);
+			_1exit(argv[1]);
+			exit(0);
 		}
 
 		if (process_command(argv) == 0)
@@ -48,7 +45,6 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
 			_exec(argv, av[0]);
 
 		free(cmd);
-		free(cmd_cpy);
 		cmd = NULL;
 	} while (1);
 
