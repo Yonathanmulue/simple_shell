@@ -38,7 +38,7 @@ char *_strdup(char *s);
 void remove_trailing_and_leading_spaces(char *str);
 void tokenize(char *command, char *argv[MAX_ARGS]);
 int num_args(char *argv[]);
-int cd(char *path);
+void cd(char *path);
 int process_command(char **argv);
 /**
 * struct alias_s - this is for alias structures
