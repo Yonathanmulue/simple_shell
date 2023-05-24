@@ -1,111 +1,109 @@
 #include "shell.h"
 
 /**
-* remove_trailing_and_leading_spaces - remove trailing spaces from a string
-* @str: string to remove trailing spaces from
+* remove_trailing_and_leading_spaces - we use this to delete the 
+* trailing spaces from a string
+* @str: this is the string to delete trailing spaces
 */
 void remove_trailing_and_leading_spaces(char *str)
 {
-	size_t len = _strlen(str);
-	size_t start = 0;
-	size_t i;
+	size_t lens = _strlen(str);
+	size_t starter = 0;
+	size_t v;
 
-	/* Remove trailing spaces */
-	if (len > 0)
+	if (lens > 0)
 	{
-		while (len > 0 && str[len - 1] == ' ')
-			len--;
-		str[len] = '\0';
+		while (lens > 0 && str[lens - 1] == ' ')
+			lens--;
+		str[lens] = '\0';
 	}
 
-	/* Find the starting position after removing trailing spaces */
-	while (str[start] == ' ')
-		start++;
+	while (str[starter] == ' ')
+		starter++;
 
-	/* Shift the string to remove leading spaces */
-	if (start > 0)
+	if (starter > 0)
 	{
-		i = 0;
-		while (str[start + i] != '\0')
+		v = 0;
+		while (str[starter + v] != '\0')
 		{
-			str[i] = str[start + i];
-			i++;
+			str[v] = str[starter + v];
+			v++;
 		}
-		str[i] = '\0';
+		str[v] = '\0';
 	}
 }
 
 /**
-* tokenize - tokenize a string into an array of tokens
-* @command: string to tokenize
-* @argv: array to store tokens
+* tokenize - this tokenizes the string into an array tokens
+* @command: this is the string tokenizes
+* @argv: this argument is an array to store tokenns
 */
 
 void tokenize(char *command, char *argv[MAX_ARGS])
 {
 	char *token;
-	int i = 0;
+	int v = 0;
 
 	token = _strtok(command, " ");
 	while (token != NULL)
 	{
-		argv[i++] = token;
+		argv[v++] = token;
 		token = _strtok(NULL, " ");
 	}
-	argv[i] = NULL;
+	argv[v] = NULL;
 }
 
 /**
-* num_args - count the number of arguments in an array of arguments
-* @argv: array of arguments
+* num_args - this funtion counts the number of 
+* arguments in an array of inputted args
+* @argv: this the array of args
 *
-* Return: number of arguments in argv
+* Return: we return the number of arguments in argv
 */
 int num_args(char *argv[])
 {
-	int i = 0;
+	int v = 0;
 
-	while (argv[i] != NULL)
-		i++;
-	return (i);
+	while (argv[v] != NULL)
+		v++;
+	return (v);
 }
 
 /**
-* _atoi - convert a string to an integer
-* @str: string to convert
+* _atoi - this atoi function converts a strings into array
+* @str: this is the string that convert
 *
-* Return: integer value of str
+* Return: this is the integer value of str
 */
 int _atoi(const char *str)
 {
-	int i, n = 0;
-	int sign = 1;
+	int v, m = 0;
+	int signs = 1;
 
-	for (i = 0; str[i] != '\0'; i++)
-		if (str[i] == '-')
-			sign = -1;
-		else if (str[i] >= '0' && str[i] <= '9')
-			n = n * 10 + (str[i] - '0');
+	for (v = 0; str[v] != '\0'; v++)
+		if (str[v] == '-')
+			signs = -1;
+		else if (str[v] >= '0' && str[v] <= '9')
+			m = m * 10 + (str[v] - '0');
 		else
 			break;
 
-	return (n * sign);
+	return (m * signs);
 }
 
 /**
-* _1exit - exit with a status code
-* @status: status code to exit with
+* _1exit - this functions exits with a status 
+* @status: this is the status code to exit 
 */
 void _1exit(char *status __attribute__((unused)))
 {
-	int i;
+	int v;
 
 	if (status != NULL)
 	{
-		i  = _atoi(status);
-		free(cmd);
-		exit(i);
+		v  = _atoi(status);
+		exit(v);
 	}
-	free(cmd);
 	exit(0);
 }
+
