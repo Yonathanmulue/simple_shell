@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
-* remove_trailing_and_leading_spaces - we use this to delete the 
+* remove_trailing_and_leading_spaces - we use this to delete the
 * trailing spaces from a string
 * @str: this is the string to delete trailing spaces
 */
@@ -54,7 +54,7 @@ void tokenize(char *command, char *argv[MAX_ARGS])
 }
 
 /**
-* num_args - this funtion counts the number of 
+* num_args - this funtion counts the number of
 * arguments in an array of inputted args
 * @argv: this the array of args
 *
@@ -92,8 +92,8 @@ int _atoi(const char *str)
 }
 
 /**
-* _1exit - this functions exits with a status 
-* @status: this is the status code to exit 
+* _1exit - this functions exits with a status
+* @status: this is the status code to exit
 */
 void _1exit(char *status __attribute__((unused)))
 {
@@ -102,8 +102,10 @@ void _1exit(char *status __attribute__((unused)))
 	if (status != NULL)
 	{
 		v  = _atoi(status);
+		free(cmd);
 		exit(v);
 	}
+	free(cmd);
 	exit(0);
 }
 
